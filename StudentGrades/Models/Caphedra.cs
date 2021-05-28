@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 #nullable disable
 
@@ -14,7 +16,9 @@ namespace StudentGrades
         }
 
         public int Id { get; set; }
+        [Display(Name = "Ім'я")]
         public string Name { get; set; }
+        [Display(Name = "Інформація")]
         public string Info { get; set; }
 
         public virtual ICollection<Discipline> Disciplines { get; set; }

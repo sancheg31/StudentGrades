@@ -31,5 +31,6 @@ namespace StudentGrades
         public virtual ICollection<CourseFinal> CourseFinals { get; set; }
         public virtual ICollection<CourseModule> CourseModules { get; set; }
         public virtual ICollection<CoursesTeacher> CoursesTeachers { get; set; }
+        public virtual ICollection<CoursesStudent> CoursesStudents { get; set; }
     }
 }

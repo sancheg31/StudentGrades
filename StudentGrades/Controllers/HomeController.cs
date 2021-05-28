@@ -6,20 +6,39 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using StudentGrades.Models;
+using StudentGrades.ViewModels;
 
 namespace StudentGrades.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly DBStudentGradesContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(DBStudentGradesContext context)
         {
-            _logger = logger;
+            _context = context;
         }
 
-        public IActionResult Index()
+        //bottle neck, opens landing student page or if studentId is invalid - go to login/register
+        public IActionResult Index(int? studentId)
         {
+            ViewData["StudentId"] = studentId;
+            if (studentId == null || studentId == -1)
+            {
+                return View();
+            }
+
+            Student student = _context.Students.Find(studentId);
+            if (student == null)
+            {
+                return View();
+            }
+
+            UserInfo userInfo = _context.UserInfos.Find(student.UserInfoId);
+            ViewData["Code"] = student.UserInfoId;
+            ViewData["Login"] = userInfo.Login;
+            ViewData["Email"] = userInfo.Email;
+            
             return View();
         }
 

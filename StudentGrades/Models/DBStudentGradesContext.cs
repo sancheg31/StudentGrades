@@ -25,6 +25,7 @@ namespace StudentGrades
         public virtual DbSet<CourseModule> CourseModules { get; set; }
         public virtual DbSet<CourseModuleResult> CourseModuleResults { get; set; }
         public virtual DbSet<CoursesTeacher> CoursesTeachers { get; set; }
+        public virtual DbSet<CoursesStudent> CoursesStudents { get; set; }
         public virtual DbSet<Discipline> Disciplines { get; set; }
         public virtual DbSet<ModuleType> ModuleTypes { get; set; }
         public virtual DbSet<Student> Students { get; set; }
@@ -180,6 +181,21 @@ namespace StudentGrades
                     .HasForeignKey(d => d.TeacherRoleId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_CoursesTeachers_TeacherRoles");
+            });
+
+            modelBuilder.Entity<CoursesStudent>(entity =>
+            {
+                entity.HasOne(d => d.Course)
+                      .WithMany(p => p.CoursesStudents)
+                      .HasForeignKey(d => d.CourseId)
+                      .OnDelete(DeleteBehavior.ClientSetNull)
+                      .HasConstraintName("FK_CourseStudents_Courses");
+
+                entity.HasOne(d => d.Student)
+                      .WithMany(p => p.CoursesStudents)
+                      .HasForeignKey(d => d.StudentId)
+                      .OnDelete(DeleteBehavior.ClientSetNull)
+                      .HasConstraintName("FK_CourseStudents_Students");
             });
 
             modelBuilder.Entity<Discipline>(entity =>

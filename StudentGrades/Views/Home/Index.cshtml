@@ -1,8 +1,19 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Успішність студентів";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@if (ViewData["StudentId"] == null || (int)ViewData["StudentId"] == -1)
+{
+    <a asp-controller="Account" asp-action="Login">Вхід</a>
+    <a asp-controller="Account" asp-action="Register">Реєстрація</a>
+
+}
+else
+{
+    <p>@ViewData["Code"]</p>
+    <p>@ViewData["Login"]</p>
+    <p>@ViewData["Email"]</p>
+    <a asp-controller="Account" asp-action="Logout">
+        Вихід
+    </a>
+}
