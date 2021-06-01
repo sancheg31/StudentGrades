@@ -1,0 +1,77 @@
+﻿@model StudentGrades.Course
+
+
+<h1>Інформація про курс</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.LectureHours)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.LectureHours)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PracticeHours)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PracticeHours)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SelfDevelopmentHours)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SelfDevelopmentHours)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.StartDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.StartDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EndDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EndDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Info)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Info)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AssessmentType)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AssessmentType.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Discipline)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Discipline.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Term)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Term.Id)
+        </dd>
+    </dl>
+</div>
+@if ((string)ViewData["Role"] == "teacher" ||
+(string)ViewData["Role"] == "admin")
+{
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.Id">Редагувати</a>
+    </div>
+}
+<div>
+    <a asp-action="NavigateToCourseModules" asp-route-id="@Model.Id">Перейти до контролів</a>
+</div>
+<div>
+    <a asp-action="Index">Назад</a>
+</div>

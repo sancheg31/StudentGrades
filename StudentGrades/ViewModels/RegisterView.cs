@@ -36,9 +36,10 @@ namespace StudentGrades.ViewModels
         [Required]
         [Compare("Password", ErrorMessage = "Паролі не співпадають")]
         [Display(Name = "Підтвердження паролю")]
-
         [DataType(DataType.Password)]
         public string PasswordConfirm { get; set; }
+        [Display(Name = "Ви вчитель?")]
+        public bool IsTeacher { get; set; }
         
     }
 }

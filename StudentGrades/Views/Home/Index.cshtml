@@ -2,18 +2,5 @@
     ViewData["Title"] = "Успішність студентів";
 }
 
-@if (ViewData["StudentId"] == null || (int)ViewData["StudentId"] == -1)
-{
-    <a asp-controller="Account" asp-action="Login">Вхід</a>
-    <a asp-controller="Account" asp-action="Register">Реєстрація</a>
-
-}
-else
-{
-    <p>@ViewData["Code"]</p>
-    <p>@ViewData["Login"]</p>
-    <p>@ViewData["Email"]</p>
-    <a asp-controller="Account" asp-action="Logout">
-        Вихід
-    </a>
-}
+<a asp-controller="Account" asp-action="Login">Вхід</a>
+<a asp-controller="Account" asp-action="Register">Реєстрація</a>

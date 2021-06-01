@@ -12,7 +12,7 @@
 
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Особистий кабінет</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Personal">Особистий кабінет</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarColor01"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -21,18 +21,16 @@
                 <div class="collapse navbar-collapse" id="navbarColor01">
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Дисципліни</a>
+                            <a class="nav-link" asp-area="" asp-controller="Disciplines" asp-action="Index">Дисципліни</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Кафедри</a>
+                            <a class="nav-link" asp-area="" asp-controller="Caphedras" asp-action="Index">Кафедри</a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Успішність</a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Index">Оцінки</a>
-                                <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Index">Курси</a>
-                                <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Index">Сессія</a>
-                            </div>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="RedirectToCourses">Курси</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="CourseFinals" asp-action="Index">Сессія</a>
                         </li>
                     </ul>
                     <form class="d-flex" data-children-count="1">

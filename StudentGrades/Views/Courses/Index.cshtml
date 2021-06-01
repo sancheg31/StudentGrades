@@ -1,0 +1,87 @@
+﻿@model IEnumerable<StudentGrades.Course>
+
+<h1>Твої курси</h1>
+
+@if ((string)ViewData["Role"] == "admin")
+{
+    <p>
+        <a asp-action="Create">Створити новий курс</a>
+    </p>
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DisciplineId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LectureHours)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PracticeHours)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SelfDevelopmentHours)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AssessmentTypeId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TermId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Info)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.Id">
+                    @Html.DisplayFor(modelItem => item.Discipline.Name)
+                </a>  
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LectureHours)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PracticeHours)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SelfDevelopmentHours)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AssessmentType.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Term.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Info)
+            </td>
+            @if ((string)ViewData["Role"] == "admin")
+            {
+                <td>
+                    <a asp-action="Delete" asp-route-id="@item.Id">Видалити</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Редагувати</a>
+                </td>
+            }
+        </tr>
+        }
+    </tbody>
+</table>

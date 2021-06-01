@@ -1,0 +1,66 @@
+﻿@model StudentGrades.Course
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Створити курс</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="DisciplineId" class="control-label"></label>
+                <select asp-for="DisciplineId" class ="form-control" asp-items="ViewBag.DisciplineId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="TermId" class="control-label"></label>
+                <select asp-for="TermId" class ="form-control" asp-items="ViewBag.TermId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="AssessmentTypeId" class="control-label"></label>
+                <select asp-for="AssessmentTypeId" class ="form-control" asp-items="ViewBag.AssessmentTypeId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="LectureHours" class="control-label"></label>
+                <input asp-for="LectureHours" class="form-control" />
+                <span asp-validation-for="LectureHours" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PracticeHours" class="control-label"></label>
+                <input asp-for="PracticeHours" class="form-control" />
+                <span asp-validation-for="PracticeHours" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SelfDevelopmentHours" class="control-label"></label>
+                <input asp-for="SelfDevelopmentHours" class="form-control" />
+                <span asp-validation-for="SelfDevelopmentHours" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StartDate" class="control-label"></label>
+                <input asp-for="StartDate" class="form-control" />
+                <span asp-validation-for="StartDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EndDate" class="control-label"></label>
+                <input asp-for="EndDate" class="form-control" />
+                <span asp-validation-for="EndDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Info" class="control-label"></label>
+                <input asp-for="Info" class="form-control" />
+                <span asp-validation-for="Info" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Створити" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Назад</a>
+</div>
+

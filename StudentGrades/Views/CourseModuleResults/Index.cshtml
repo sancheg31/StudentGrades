@@ -1,0 +1,41 @@
+﻿@model IEnumerable<StudentGrades.CourseModuleResult>
+
+<h1>Курс Методи Оптимізації</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CourseModule.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CourseModule.Info)
+            </th>
+            <th>
+                Бал
+            </th>
+            <th>
+                Максимальний бал
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CourseModule.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CourseModule.Info)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Score)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CourseModule.MaxScore)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

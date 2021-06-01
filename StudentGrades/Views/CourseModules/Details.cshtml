@@ -1,0 +1,44 @@
+﻿@model StudentGrades.CourseModule
+
+
+<h1>Модуль @Model.Name</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.MaxScore)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.MaxScore)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DueDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DueDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Info)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Info)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ModuleTypeid)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ModuleType.Name)
+        </dd>
+    </dl>
+</div>
+@if ((string)ViewData["Role"] == "teacher" ||
+(string)ViewData["Role"] == "admin")
+{
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Редагувати</a>
+</div>
+}
+<div>
+    <a asp-action="Index">Назад</a>
+</div>

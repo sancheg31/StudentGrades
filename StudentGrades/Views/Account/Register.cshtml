@@ -6,36 +6,40 @@
     <div asp-validation-summary="ModelOnly"></div>
     <div>
         <label asp-for="Name"></label><br />
-        <input asp-for="Name" value="Саня"/>
+        <input asp-for="Name" value="Саня" />
         <span asp-validation-for="Name"></span>
     </div>
     <div>
         <label asp-for="Login"></label><br />
-        <input asp-for="Login" value="sancheg31"/>
+        <input asp-for="Login" value="sancheg31" />
         <span asp-validation-for="Login"></span>
     </div>
     <div>
         <label asp-for="Email"></label><br />
-        <input asp-for="Email" value="kushnirenko.alexander784@gmail.com"/>
+        <input asp-for="Email" value="kushnirenko.alexander784@gmail.com" />
         <span asp-validation-for="Email"></span>
     </div>
     <div>
         <label asp-for="Telephone"></label><br />
-        <input asp-for="Telephone" value="+380665802045"/>
+        <input asp-for="Telephone" value="+380665802045" />
         <span asp-validation-for="Telephone"></span>
     </div>
     <div>
         <label asp-for="Password"></label><br />
-        <input asp-for="Password" value="Computer784*"/>
+        <input asp-for="Password" value="Computer784*" />
         <span asp-validation-for="Password"></span>
     </div>
     <div>
         <label asp-for="PasswordConfirm"></label><br />
-        <input asp-for="PasswordConfirm" value="Computer784*"/>
+        <input asp-for="PasswordConfirm" value="Computer784*" />
         <span asp-validation-for="PasswordConfirm"></span>
     </div>
     <div>
-        <input type="submit" value="Реєстрація" />
+        <label asp-for="IsTeacher"></label><br />
+        <input asp-for="IsTeacher" />
+    </div>
+    <div>
+        <input type="submit" value="Зареєструватися" />
     </div>
 </form>
 

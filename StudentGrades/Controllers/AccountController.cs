@@ -49,21 +49,29 @@ namespace StudentGrades.Controllers
 
             if (result.Succeeded)
             {
-                UserInfo userInfo = _context.UserInfos.FirstOrDefault(info => info.Login == model.Login &&
+                User user = await _userManager.FindByNameAsync(model.Login);
+                var userRoles = await _userManager.GetRolesAsync(user);
+
+                if (userRoles[0] == "admin")
+                {
+                    return RedirectToAction("Index", "Admin");
+                }
+                else if (userRoles[0] == "student")
+                {
+                    UserInfo userInfo = _context.UserInfos.FirstOrDefault(info => info.Login == model.Login &&
                                                                      info.Password == model.Password);
-                if (userInfo == null)
+                    Student student = _context.Students.FirstOrDefault(st => st.UserInfoId == userInfo.Id);
+                    return RedirectToAction("Index", "Students", new { id = student.Id });
+                }
+                else if (userRoles[0] == "teacher")
                 {
-                    return RedirectToAction("Login", "Account");
+                    UserInfo userInfo = _context.UserInfos.FirstOrDefault(info => info.Login == model.Login &&
+                                                                     info.Password == model.Password);
+                    Teacher teacher = _context.Teachers.FirstOrDefault(tch => tch.UserInfoId == userInfo.Id);
+                    return RedirectToAction("Index", "Teachers", new { id = teacher.Id });
                 }
 
-                Student student = _context.Students.FirstOrDefault(st => st.UserInfoId == userInfo.Id);
-
-                if (student == null)
-                {
-                    return RedirectToAction("Login", "Account");
-                }
-
-                return RedirectToAction("Index", "Home", new { studentId = student.Id });
+                return RedirectToAction("Login", "Account");
             }
             else
             {
@@ -106,6 +114,15 @@ namespace StudentGrades.Controllers
 
             if (result.Succeeded)
             {
+                if (model.IsTeacher)
+                {
+                    await _userManager.AddToRoleAsync(user, "teacher");
+                }
+                else
+                {
+                    await _userManager.AddToRoleAsync(user, "student");
+                }
+
                 UserInfo userInfo = new UserInfo
                 {
                     Name = model.Name,
@@ -123,7 +140,15 @@ namespace StudentGrades.Controllers
 
                 await _signInManager.SignInAsync(user, false);
 
-                return RedirectToAction("RegisterStudent", "Account");
+                if (model.IsTeacher)
+                {
+                    return RedirectToAction("RegisterTeacher", "Account");
+                }
+                else
+                {
+                    return RedirectToAction("RegisterStudent", "Account");
+                }
+                   
             }
             else
             {
@@ -134,6 +159,43 @@ namespace StudentGrades.Controllers
             }
 
             return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult RegisterTeacher()
+        {
+            ViewData["AcademicDegreeId"] = new SelectList(_context.AcademicDegrees, "Id", "Name");
+            ViewData["CaphedraId"] = new SelectList(_context.Caphedras, "Id", "Name");
+
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RegisterTeacher([Bind("Id,AcademicDegreeId,CaphedraId,Age,Birthday,Info")] Teacher teacher)
+        {
+            if (ModelState.IsValid)
+            {
+                Teacher tch = new Teacher
+                {
+                    UserInfoId = (int)TempData["UserInfoId"],
+                    AcademicDegreeId = teacher.AcademicDegreeId,
+                    CaphedraId = teacher.CaphedraId,
+                    Age = teacher.Age,
+                    Birthday = teacher.Birthday,
+                    Info = teacher.Info
+                };
+
+                var entry = await _context.AddAsync(tch);
+                await _context.SaveChangesAsync();
+                int id = (int)entry.Property("Id").CurrentValue;
+
+                return RedirectToAction("Index", "Teachers", new { id = id });
+            }
+
+            ViewData["AcademicDegreeId"] = new SelectList(_context.AcademicDegrees, "Id", "Name");
+            ViewData["CaphedraId"] = new SelectList(_context.Caphedras, "Id", "Name");
+            return View(teacher);
+
         }
 
         [HttpGet]
@@ -165,7 +227,8 @@ namespace StudentGrades.Controllers
                 await _context.SaveChangesAsync();
                 int id = (int)entry.Property("Id").CurrentValue;
 
-                return RedirectToAction("Index", "Home", new { studentId = id });
+
+                return RedirectToAction("Index", "Students", new { id = id });
             }
 
             ViewData["StudentGroupId"] = new SelectList(_context.StudentGroups, "Id", "Name", student.StudentGroupId);

@@ -4,9 +4,8 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<h1>Редагування профілю</h1>
 
-<h4>Student</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -14,35 +13,33 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
-                <label asp-for="StudentId" class="control-label"></label>
-                <select asp-for="StudentId" class="form-control" asp-items="ViewBag.StudentId"></select>
-                <span asp-validation-for="StudentId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="StudentGroupId" class="control-label"></label>
                 <select asp-for="StudentGroupId" class="form-control" asp-items="ViewBag.StudentGroupId"></select>
                 <span asp-validation-for="StudentGroupId" class="text-danger"></span>
             </div>
+            <!--
             <div class="form-group">
-                <label asp-for="TermId" class="control-label"></label>
-                <select asp-for="TermId" class="form-control" asp-items="ViewBag.TermId"></select>
-                <span asp-validation-for="TermId" class="text-danger"></span>
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" asp-items="ViewBag.Email">
+                <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="UserInfoId" class="control-label"></label>
-                <select asp-for="UserInfoId" class="form-control" asp-items="ViewBag.UserInfoId"></select>
-                <span asp-validation-for="UserInfoId" class="text-danger"></span>
+                <label asp-for="Telephone" class="control-label"></label>
+                <input asp-for="Telephone" class="form-control" asp-items="ViewBag.Telephone">
+                <span asp-validation-for="Telephone" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Age" class="control-label"></label>
-                <input asp-for="Age" class="form-control" />
-                <span asp-validation-for="Age" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Brirthday" class="control-label"></label>
-                <input asp-for="Brirthday" class="form-control" />
-                <span asp-validation-for="Brirthday" class="text-danger"></span>
-            </div>
+
+                <div class="form-group">
+                    <label asp-for="UserInfo.Login" class="control-label"></label>
+                    <input asp-for="UserInfo.Login" class="form-control">
+                    <span asp-validation-for="UserInfo.Login" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="UserInfo.Password" class="control-label"></label>
+                    <input asp-for="UserInfo.Password" class="form-control">
+                    <span asp-validation-for="UserInfo.Password" class="text-danger"></span>
+                </div>
+            -->
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
@@ -51,6 +48,6 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" asp-route-id="@Model.Id">Назад</a>
 </div>
 
